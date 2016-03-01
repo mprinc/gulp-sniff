@@ -1,37 +1,59 @@
 
-# gulp-filenames
+# gulp-sniff
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 
-> Filename gathering plugin for [gulp](https://github.com/wearefractal/gulp)
+Filename gathering plugin for [gulp](https://github.com/wearefractal/gulp). You can **sniff** through the ```gulp pipes``` and collect all _filenames_ that marshaled through them.
+
+It is an extension of the [JohnyDays](https://github.com/johnydays)'s [gulp-filenames](https://www.npmjs.com/package/gulp-filenames) plugin, but migrated (back) to JS, fixed some bugs, and added some features.
 
 ## Usage
 
-First, install `gulp-filenames` as a development dependency:
+First, install `gulp-sniff` as a development dependency:
 
 ```shell
-npm install --save-dev gulp-filenames
+npm install --save-dev gulp-sniff
 ```
 
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-var filenames = require("gulp-filenames");
 
-gulp.src("./src/*.coffee")
-	.pipe(filenames("coffeescript"))
+var sniff = require('gulp-sniff');
+
+stream = gulp.src("./src/*.ts")
+	.pipe(sniff("TypeScript"))
 	.pipe(gulp.dest("./dist"));
 
-gulp.src("./src/*.js")
-  .pipe(filenames("javascript"))
-  .pipe(gulp.dest("./dist"));
+stream.on('end', function() {
+  console.log("TypeScript files:", sniff.get("TypeScript"));
+});
 
-filenames.get("coffeescript") // ["a.coffee","b.coffee"] 
-                              // Do Something With it
+```
+
+```javascript
+
+var sniff = require('gulp-sniff');
+var merge = require('merge-stream');
+
+stream1 = gulp.src("./src/*.js")
+  .pipe(sniff("javascript"))
+  .pipe(gulp.dest("./dist")).
+
+stream2 = gulp.src("./src/*.ts")
+	.pipe(sniff("TypeScript"))
+	.pipe(gulp.dest("./dist"));
+
+stream = merge(stream1, stream2);
+
+stream.on('end', function() {
+	console.log("TypeScript files:", sniff.get("TypeScript"));
+});
+
 ```
 
 ## API
 
-### filenames([name], [options])
+### sniff([name], [options])
 
 #### name
 
@@ -43,9 +65,17 @@ Namespace the filenames
 
 override previous files when a new one passes through
 
-### filenames.get([name], [what])
+#### captureFolders (default: false)
 
-#### name 
+capture foldernames (in addition to default of capturing filenames)
+
+#### captureFilenames (default: true)
+
+capture filenames
+
+### sniff.get([name], [what])
+
+#### name
 Get only these filenames ("all" to get everything)
 
 #### what
@@ -58,14 +88,14 @@ Get only these filenames ("all" to get everything)
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
-[npm-url]: https://npmjs.org/package/gulp-filenames
-[npm-image]: https://badge.fury.io/js/gulp-filenames.png
+[npm-url]: https://npmjs.org/package/gulp-sniff
+[npm-image]: https://badge.fury.io/js/gulp-sniff.png
 
-[travis-url]: http://travis-ci.org/JohnyDays/gulp-filenames
-[travis-image]: https://secure.travis-ci.org/JohnyDays/gulp-filenames.png?branch=master
+[travis-url]: http://travis-ci.org/mprinc/gulp-sniff
+[travis-image]: https://secure.travis-ci.org/mprinc/gulp-sniff.png?branch=master
 
-[coveralls-url]: https://coveralls.io/r/JohnyDays/gulp-filenames
-[coveralls-image]: https://coveralls.io/repos/JohnyDays/gulp-filenames/badge.png
+[coveralls-url]: https://coveralls.io/r/mprinc/gulp-sniff
+[coveralls-image]: https://coveralls.io/repos/mprinc/gulp-sniff/badge.png
 
-[depstat-url]: https://david-dm.org/JohnyDays/gulp-filenames
-[depstat-image]: https://david-dm.org/JohnyDays/gulp-filenames.png
+[depstat-url]: https://david-dm.org/mprinc/gulp-sniff
+[depstat-image]: https://david-dm.org/mprinc/gulp-sniff.png
