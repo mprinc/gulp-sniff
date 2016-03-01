@@ -88,6 +88,12 @@ Get only these filenames ("all" to get everything)
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
+## Versions
+
+# Release History
+* 2.1.0 Fixed bugs with original plugin, added additional features of (non)sniffing folder/file names
+* previous: branched from: [gulp-filenames](https://www.npmjs.com/package/gulp-filenames)
+
 [npm-url]: https://npmjs.org/package/gulp-sniff
 [npm-image]: https://badge.fury.io/js/gulp-sniff.png
 
