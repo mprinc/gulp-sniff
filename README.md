@@ -17,37 +17,61 @@ npm install --save-dev gulp-sniff
 Then, add it to your `gulpfile.js`:
 
 ```javascript
-
+var gulp = require('gulp');
 var sniff = require('gulp-sniff');
 
-stream = gulp.src("./src/*.ts")
-	.pipe(sniff("TypeScript"))
-	.pipe(gulp.dest("./dist"));
+var stream = gulp.src("src/*.js")
+	.pipe(sniff("js"))
+	.pipe(gulp.dest("dest"));
 
 stream.on('end', function() {
-  console.log("TypeScript files:", sniff.get("TypeScript"));
+	console.log("JS files:", sniff.get("js"));
 });
-
 ```
+
+or more condensed :) (used for testing in interactive node):
+
+```javascript
+var gulp = require('gulp');
+var sniff = require('gulp-sniff');
+var stream = gulp.src("*.js").pipe(sniff("js")).pipe(gulp.dest("./dest"));
+var e = stream.on('end', function() {console.log("js files:", sniff.get("js"));});
+```
+
+More advanced version with parallel streams:
 
 ```javascript
 
+var gulp = require('gulp');
 var sniff = require('gulp-sniff');
 var merge = require('merge-stream');
 
-stream1 = gulp.src("./src/*.js")
-  .pipe(sniff("javascript"))
-  .pipe(gulp.dest("./dist")).
+var stream1 = gulp.src("*.js")
+	.pipe(sniff("js"))
+	.pipe(gulp.dest("dest"));
 
-stream2 = gulp.src("./src/*.ts")
-	.pipe(sniff("TypeScript"))
-	.pipe(gulp.dest("./dist"));
+var stream2 = gulp.src("*.json")
+	.pipe(sniff("json"))
+	.pipe(gulp.dest("dest"));
 
-stream = merge(stream1, stream2);
+var stream = merge(stream1, stream2);
 
-stream.on('end', function() {
-	console.log("TypeScript files:", sniff.get("TypeScript"));
+var e = stream.on('end', function() {
+	console.log("JS files:", sniff.get("js"));
 });
+```
+
+or more condensed :) (used for testing in interactive node):
+
+```javascript
+var gulp = require('gulp');
+var sniff = require('gulp-sniff');
+var merge = require('merge-stream');
+
+var stream1 = gulp.src("*.js").pipe(sniff("js")).pipe(gulp.dest("dest"));
+var stream2 = gulp.src("*.json").pipe(sniff("json")).pipe(gulp.dest("dest"));
+var stream = merge(stream1, stream2);
+var e = stream.on('end', function() {console.log("JS files:", sniff.get("js"));});
 
 ```
 
