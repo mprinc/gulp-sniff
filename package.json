@@ -1,6 +1,6 @@
 {
   "name": "gulp-sniff",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Register every filename that has passed through",
   "keywords": [
     "gulpplugin, sniffing, gulp, filenames"

@@ -44,7 +44,7 @@ More advanced version with parallel streams:
 
 var gulp = require('gulp');
 var sniff = require('gulp-sniff');
-var merge = require('merge-stream');
+var es = require('event-stream');
 
 var stream1 = gulp.src("*.js")
 	.pipe(sniff("js"))
@@ -54,7 +54,7 @@ var stream2 = gulp.src("*.json")
 	.pipe(sniff("json"))
 	.pipe(gulp.dest("dest"));
 
-var stream = merge(stream1, stream2);
+var stream = es.merge(stream1, stream2);
 
 var e = stream.on('end', function() {
 	console.log("JS files:", sniff.get("js"));
@@ -66,11 +66,11 @@ or more condensed :) (used for testing in interactive node):
 ```javascript
 var gulp = require('gulp');
 var sniff = require('gulp-sniff');
-var merge = require('merge-stream');
+var es = require('event-stream');
 
 var stream1 = gulp.src("*.js").pipe(sniff("js")).pipe(gulp.dest("dest"));
 var stream2 = gulp.src("*.json").pipe(sniff("json")).pipe(gulp.dest("dest"));
-var stream = merge(stream1, stream2);
+var stream = es.merge(stream1, stream2);
 var e = stream.on('end', function() {console.log("JS files:", sniff.get("js"));});
 
 ```
