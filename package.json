@@ -1,21 +1,21 @@
 {
   "name": "gulp-sniff",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Register every filename that has passed through",
   "keywords": [
     "gulpplugin, sniffing, gulp, filenames"
   ],
   "author": [
-      {
-        "name": "Joao Dias",
-        "email": "joao.l.d.a@hotmail.com",
-        "url": "https://github.com/JohnyDays"
-      },
-      {
-        "name": "Sasha Rudan",
-        "email": "mprinc@gmail.com",
-        "url": "https://github.com/mprinc"
-      }
+    {
+      "name": "Joao Dias",
+      "email": "joao.l.d.a@hotmail.com",
+      "url": "https://github.com/JohnyDays"
+    },
+    {
+      "name": "Sasha Rudan",
+      "email": "mprinc@gmail.com",
+      "url": "https://github.com/mprinc"
+    }
   ],
   "repository": "mprinc/gulp-sniff",
   "scripts": {
@@ -23,8 +23,8 @@
     "build": "coffee -w index.coffee"
   },
   "dependencies": {
-    "gulp-util": "~2.2.0",
-    "through2": "*"
+    "gulp-util": "^3.0.7",
+    "through2": "^2.0.1"
   },
   "devDependencies": {
     "coffee-script": "^1.7.1",
