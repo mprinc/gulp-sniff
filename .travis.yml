@@ -1,6 +1,26 @@
+sudo: false
 language: node_js
+cache:
+  directories:
+    - node_modules
+notifications:
+  email: true
 node_js:
-  - '0.8'
-  - '0.10'
-after_script:
-  - npm test
+  - '4'
+  - iojs-v3
+  - iojs-v2
+  - iojs-v1
+before_install:
+  - npm i -g npm@^2.0.0
+before_script:
+  - npm prune
+script:
+  - npm run test # do not allow releasing if test fails
+after_success:
+  - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
+  - python travis_after_all.py
+  - 'export $(cat .to_export_back) &> /dev/null'
+  - npm run semantic-release
+branches:
+  except:
+    - "/^v\\d+\\.\\d+\\.\\d+$/"
