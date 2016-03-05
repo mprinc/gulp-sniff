@@ -21,11 +21,20 @@ var gulp = require('gulp');
 var sniff = require('gulp-sniff');
 
 var stream = gulp.src("src/*.js")
-	.pipe(sniff("js"))
+	.pipe(sniff("js")) // prints all files matched with gulp.src("src/*.js")
+	.pipe(gulp.dest("dest"));
+	```
+
+```javascript
+var gulp = require('gulp');
+var sniff = require('gulp-sniff');
+
+var stream = gulp.src("src/*.js")
+	.pipe(sniff("js", {noDirectReport: true})) // doesn't print anymore
 	.pipe(gulp.dest("dest"));
 
 stream.on('end', function() {
-	console.log("JS files:", sniff.get("js"));
+	console.log("JS files:", sniff.get("js")); // prints all captured filenames
 });
 ```
 
