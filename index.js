@@ -7,24 +7,34 @@
 	file_names = {};
 
 	module.exports = function(name, options) {
+		if(typeof name === 'undefined' || !name){
+			name = 'default';
+		};
+
+		if(typeof name !== 'string'){ // options without name
+			options = name;
+			name = 'default';
+		}
 		options = options || {};
 
-        // console.log("[gulp-sniff] registering for: ", name);
+		if(options.debug) gutil.log("[gulp-sniff] registering for: '", name, "' and with options: ", options);
 
 		var filenames = function(file, enc, done) {
-			// https://www.npmjs.com/package/gulp-util
-			// https://www.npmjs.com/package/chalk
-			if(options.noDirectReport !== true){
-				if(options.detailed === true){
-					gutil.log(gutil.colors.blue("[gulp-sniff(name:"+name+"):filenames]"),
-					gutil.colors.white(" isNull: ", file.isNull(), ", isStream: ", file.isStream(),
-						", isBuffer: ", file.isBuffer(), ", file.path: ", file.path,
-						", file.base: ", file.base, "file.relative: ", file.relative)
-					);
-				}else{
-					gutil.log(gutil.colors.blue("[gulp-sniff("+name+")]"),
-					gutil.colors.white("file.relative: ", file.relative)
-					);
+			function logPassing(){
+				// https://www.npmjs.com/package/gulp-util
+				// https://www.npmjs.com/package/chalk
+				if(options.noDirectReport !== true){
+					if(options.detailed === true){
+						gutil.log(gutil.colors.blue("[gulp-sniff(name:"+name+")]"),
+						gutil.colors.white(" isNull: ", file.isNull(), ", isStream: ", file.isStream(),
+							", isBuffer: ", file.isBuffer(), ", file.path: ", file.path,
+							", file.base: ", file.base, "file.relative: ", file.relative)
+						);
+					}else{
+						gutil.log(gutil.colors.blue("[gulp-sniff("+name+")]"),
+						gutil.colors.white("file.relative: ", file.relative)
+						);
+					}
 				}
 			}
 			// gutil.beep();
@@ -33,17 +43,24 @@
 			// console.log("[gulp-sniff(name:%s):filenames] file: ", name, JSON.stringify(file));
 
             if (file.isNull()) {
-				if(options.captureFolders) module.exports.register(file, name, options);
+				if(options.captureFolders){
+					logPassing();
+					module.exports.register(file, name, options);
+				}
                 // this.push(file);
             } else if (file.isStream()) {
+				logPassing();
 				this.emit("error", new gutil.PluginError(pluginName,
 					"Stream content is not supported"));
                 // this.push(file);
 			} else if (file.isBuffer()) {
-				// recursively
-				if(options.captureFilenames !== false) module.exports.register(file, name, options);
+				if(options.captureFilenames !== false){
+					logPassing();
+					module.exports.register(file, name, options);
+				}
 				// this.push(file);
 			} else {
+				logPassing();
 				// this.push(file);
 			}
 			// NO! this duplicates?!
@@ -98,6 +115,10 @@
         // console.log("[gulp-sniff(name:%s):register] file.relative : %s", name, file.relative);
 
 		// returns the file_names[name].length
+		if(options.debug) gutil.log(gutil.colors.blue("[gulp-sniff("+name+")] logging: "),
+		gutil.colors.white("file.relative: ", file.relative)
+		);
+
 		return file_names[name].push({
 			relative: file.relative,
 			full: file.path,

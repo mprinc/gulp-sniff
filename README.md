@@ -114,6 +114,10 @@ avoids internal / direct printing of file names
 
 Reports detailed logs
 
+#### debug (default: false)
+
+Reports internal debug messages
+
 ### sniff.get([name], [what])
 
 #### name
