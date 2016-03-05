@@ -19,15 +19,15 @@
       return gulp.src("./test/files/**/*").pipe(sniff({noDirectReport: true})).pipe(gulp.dest("./test/dump")).on("end", function() {
         var all_files;
         all_files = sniff.get();
-        all_files.should.eql(["a.cc", "a.empty", "a.txt", "b.txt"]);
+        all_files.should.eql(["a.cc", "a.empty", "a.txt", "a_folder/b.txt"]);
         return done();
       });
     });
     it("Supports namespacing", function(done) {
-      return gulp.src("./test/files/*.txt").pipe(sniff("txt", {noDirectReport: true})).pipe(gulp.dest("./test/dump")).on("end", function() {
+      return gulp.src("./test/files/**/*.txt").pipe(sniff("txt", {noDirectReport: true})).pipe(gulp.dest("./test/dump")).on("end", function() {
         var txt_files;
         txt_files = sniff.get("txt");
-        txt_files.should.eql(["a.txt", "b.txt"]);
+        txt_files.should.eql(["a.txt", "a_folder/b.txt"]);
         return done();
       });
     });
