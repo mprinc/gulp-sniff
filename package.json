@@ -1,63 +1,61 @@
 {
-  "name": "gulp-sniff",
-  "version": "0.0.0-semantically-released",
-  "description": "Register every filename that has passed through",
-  "keywords": [
-    "gulpplugin, sniffing, gulp, filenames"
-  ],
-  "author": [
-    {
-      "name": "Joao Dias",
-      "email": "joao.l.d.a@hotmail.com",
-      "url": "https://github.com/JohnyDays"
-    },
-    {
-      "name": "Sasha Rudan",
-      "email": "mprinc@gmail.com",
-      "url": "https://github.com/mprinc"
-    }
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mprinc/gulp-sniff.git"
-  },
-  "scripts": {
-    "test": "istanbul cover -x 'test/*' _mocha -- -R spec test",
-    "test:single": "_mocha test",
-    "commit": "git-cz",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
-  },
-  "dependencies": {
-    "gulp-util": "^3.0.7",
-    "through2": "^2.0.1"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-as-promised": "^5.2.0",
-    "coffee-script": "^1.7.1",
-    "commitizen": "^2.5.0",
-    "coveralls": "*",
-    "cz-conventional-changelog": "^1.1.5",
-    "event-stream": "*",
-    "ghooks": "^1.0.3",
-    "gulp": "~3.8.7",
-    "istanbul": "^0.4.2",
-    "mocha": "*",
-    "semantic-release": "^4.3.5",
-    "sinon": "^1.17.3",
-    "sinon-chai": "^2.8.0"
-  },
-  "engines": {
-    "node": ">=1.0",
-    "npm": ">=1.2.10"
-  },
-  "license": "MIT",
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "npm run test"
-    }
-  }
+	"name": "gulp-sniff",
+	"version": "0.0.0-semantically-released",
+	"description": "Register every filename that has passed through",
+	"keywords": [
+		"gulpplugin, sniffing, gulp, filenames"
+	],
+	"author": [{
+		"name": "Joao Dias",
+		"email": "joao.l.d.a@hotmail.com",
+		"url": "https://github.com/JohnyDays"
+	}, {
+		"name": "Sasha Rudan",
+		"email": "mprinc@gmail.com",
+		"url": "https://github.com/mprinc"
+	}],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mprinc/gulp-sniff.git"
+	},
+	"scripts": {
+		"test": "istanbul cover -x 'test/*' _mocha -- -R spec test",
+		"test:single": "_mocha test",
+		"check-coverage": "istanbul check-coverage --statements 90 --branches 50 --functions 90 --lines 90",
+		"commit": "git-cz",
+		"semantic-release": "semantic-release pre && npm publish && semantic-release post"
+	},
+	"dependencies": {
+		"gulp-util": "^3.0.7",
+		"through2": "^2.0.1"
+	},
+	"devDependencies": {
+		"chai": "^3.5.0",
+		"chai-as-promised": "^5.2.0",
+		"coffee-script": "^1.7.1",
+		"commitizen": "^2.5.0",
+		"coveralls": "*",
+		"cz-conventional-changelog": "^1.1.5",
+		"event-stream": "*",
+		"ghooks": "^1.0.3",
+		"gulp": "~3.8.7",
+		"istanbul": "^0.4.2",
+		"mocha": "*",
+		"semantic-release": "^4.3.5",
+		"sinon": "^1.17.3",
+		"sinon-chai": "^2.8.0"
+	},
+	"engines": {
+		"node": ">=1.0",
+		"npm": ">=1.2.10"
+	},
+	"license": "MIT",
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		},
+		"ghooks": {
+			"pre-commit": "npm run test && npm run check-coverage"
+		}
+	}
 }

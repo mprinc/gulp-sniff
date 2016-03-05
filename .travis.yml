@@ -16,6 +16,7 @@ before_script:
   - npm prune
 script:
   - npm run test # do not allow releasing if test fails
+  - npm run check-coverage # do not allow releasing if coverege is under the limit
 after_success:
   - 'curl -Lo travis_after_all.py https://git.io/travis_after_all'
   - python travis_after_all.py
