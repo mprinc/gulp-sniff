@@ -15,11 +15,17 @@
 			// https://www.npmjs.com/package/gulp-util
 			// https://www.npmjs.com/package/chalk
 			if(options.noDirectReport !== true){
-				gutil.log(gutil.colors.blue("[gulp-sniff(name:"+name+"):filenames]"),
-				gutil.colors.white(" isNull: ", file.isNull(), ", isStream: ", file.isStream(),
-					", isBuffer: ", file.isBuffer(), ", file.path: ", file.path,
-					", file.base: ", file.base, "file.relative: ", file.relative)
-				);
+				if(options.detailed === true){
+					gutil.log(gutil.colors.blue("[gulp-sniff(name:"+name+"):filenames]"),
+					gutil.colors.white(" isNull: ", file.isNull(), ", isStream: ", file.isStream(),
+						", isBuffer: ", file.isBuffer(), ", file.path: ", file.path,
+						", file.base: ", file.base, "file.relative: ", file.relative)
+					);
+				}else{
+					gutil.log(gutil.colors.blue("[gulp-sniff("+name+")]"),
+					gutil.colors.white("file.relative: ", file.relative)
+					);
+				}
 			}
 			// gutil.beep();
             // console.log("[gulp-sniff(name:%s):filenames] isNull: %s, isStream: %s, isBuffer: %s, file.path: %s, file.base: %s, file.relative: %s",

@@ -101,6 +101,10 @@ capture filenames
 
 avoids internal / direct printing of file names
 
+#### detailed (default: false)
+
+Reports detailed logs
+
 ### sniff.get([name], [what])
 
 #### name
