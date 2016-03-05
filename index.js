@@ -1,6 +1,4 @@
-(function() { // This prevents problems when concatenating scripts that aren't strict.
-'use strict';
-
+(function() {
 	var file_names, gutil, through;
 
 	through = require("through2");
@@ -14,8 +12,19 @@
         // console.log("[gulp-sniff] registering for: ", name);
 
 		var filenames = function(file, enc, done) {
-            // console.log("[gulp-sniff(name:%s):filenames] isNull: %s, isStream: : %s, isBuffer: : %s, file.path : ",
-            //     name, file.isNull(), file.isStream(), file.isBuffer(), file.path);
+			// https://www.npmjs.com/package/gulp-util
+			// https://www.npmjs.com/package/chalk
+			if(options.noDirectReport !== true){
+				gutil.log(gutil.colors.blue("[gulp-sniff(name:"+name+"):filenames]"),
+				gutil.colors.white(" isNull: ", file.isNull(), ", isStream: ", file.isStream(),
+					", isBuffer: ", file.isBuffer(), ", file.path: ", file.path,
+					", file.base: ", file.base, "file.relative: ", file.relative)
+				);
+			}
+			// gutil.beep();
+            // console.log("[gulp-sniff(name:%s):filenames] isNull: %s, isStream: %s, isBuffer: %s, file.path: %s, file.base: %s, file.relative: %s",
+            //     name, file.isNull(), file.isStream(), file.isBuffer(), file.path, file.base, file.relative);
+			// console.log("[gulp-sniff(name:%s):filenames] file: ", name, JSON.stringify(file));
 
             if (file.isNull()) {
 				if(options.captureFolders) module.exports.register(file, name, options);
@@ -90,4 +99,4 @@
 		});
 	};
 
-}).call(this); // end of 'use strict';
+}).call(this);

@@ -97,6 +97,10 @@ capture foldernames (in addition to default of capturing filenames)
 
 capture filenames
 
+#### noDirectReport (default: false)
+
+avoids internal / direct printing of file names
+
 ### sniff.get([name], [what])
 
 #### name
