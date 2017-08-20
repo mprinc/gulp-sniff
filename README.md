@@ -23,7 +23,9 @@ var sniff = require('gulp-sniff');
 var stream = gulp.src("src/*.js")
 	.pipe(sniff("js")) // prints all files matched with gulp.src("src/*.js")
 	.pipe(gulp.dest("dest"));
-	```
+```
+
+or
 
 ```javascript
 var gulp = require('gulp');
