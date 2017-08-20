@@ -26,24 +26,24 @@
 		"semantic-release": "semantic-release pre && npm publish && semantic-release post"
 	},
 	"dependencies": {
-		"gulp-util": "^3.0.7",
-		"through2": "^2.0.1"
+		"gulp-util": "^3.0.8",
+		"through2": "^2.0.3"
 	},
 	"devDependencies": {
-		"chai": "^3.5.0",
-		"chai-as-promised": "^5.2.0",
-		"coffee-script": "^1.7.1",
-		"commitizen": "^2.5.0",
+		"chai": "^4.1.1",
+		"chai-as-promised": "^7.1.1",
+		"coffee-script": "^1.12.7",
+		"commitizen": "^2.9.6",
 		"coveralls": "*",
-		"cz-conventional-changelog": "^1.1.5",
+		"cz-conventional-changelog": "^2.0.0",
 		"event-stream": "*",
-		"ghooks": "^1.0.3",
-		"gulp": "~3.8.7",
-		"istanbul": "^0.4.2",
+		"ghooks": "^2.0.0",
+		"gulp": "~3.9.1",
+		"istanbul": "^0.4.5",
 		"mocha": "*",
-		"semantic-release": "^4.3.5",
-		"sinon": "^1.17.3",
-		"sinon-chai": "^2.8.0"
+		"semantic-release": "^7.0.2",
+		"sinon": "^3.2.1",
+		"sinon-chai": "^2.13.0"
 	},
 	"engines": {
 		"node": ">=1.0",
